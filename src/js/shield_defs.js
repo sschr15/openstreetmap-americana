@@ -1568,6 +1568,14 @@ export function loadShields() {
   );
 
   // Minnesota
+  const mnCountyShield = pentagonUpShield(
+    3,
+    15,
+    Color.shields.blue,
+    Color.shields.yellow,
+    Color.shields.white
+  );
+
   shields["US:MN"] = {
     spriteBlank: ["shield_us_mn_2", "shield_us_mn_3"],
     textColor: Color.shields.white,
@@ -1635,13 +1643,7 @@ export function loadShields() {
   ].forEach(
     (county) =>
       ([shields[`US:MN:${county}:CSAH`], shields[`US:MN:${county}:CR`]] = [
-        pentagonUpShield(
-          3,
-          15,
-          Color.shields.blue,
-          Color.shields.yellow,
-          Color.shields.white
-        ),
+        mnCountyShield,
         roundedRectShield(Color.shields.white, Color.shields.black),
       ])
   );
@@ -1660,14 +1662,7 @@ export function loadShields() {
     "Wilkin",
   ].forEach((county) =>
     ["CSAH", "CR"].forEach(
-      (network) =>
-        (shields[`US:MN:${county}:${network}`] = pentagonUpShield(
-          3,
-          15,
-          Color.shields.blue,
-          Color.shields.yellow,
-          Color.shields.white
-        ))
+      (network) => (shields[`US:MN:${county}:${network}`] = mnCountyShield)
     )
   );
   [
@@ -1707,7 +1702,6 @@ export function loadShields() {
     "Sherburne",
     "Steele",
     "Swift",
-    "Todd",
     "Waseca",
     "Watonwan",
     "Winona",
@@ -1720,6 +1714,20 @@ export function loadShields() {
         ))
     )
   );
+
+  shields["US:MN:Todd:CR"] = roundedRectShield(
+    Color.shields.white,
+    Color.shields.black
+  );
+  shields["US:MN:Todd:CSAH"] = {
+    ...roundedRectShield(Color.shields.white, Color.shields.black),
+    overrideByRef: {
+      2: mnCountyShield,
+      11: mnCountyShield,
+      14: mnCountyShield,
+    },
+  };
+
   shields[`US:MN:Hennepin:Park_Access`] = trapezoidDownShield(
     10,
     Color.shields.brown,
